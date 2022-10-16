@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{ 
+                background-color: #95B9C7;
+                text-align: center;
+                margin: .5cm 8cm;
+            }
+            h1 {
+                color: black;
+                font-size: 100px;
+                text-align: center;
+            }
+            p {
+                color: black;
+                font-size: 20px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Amicable Numbers</h1>
+        <div class ="values">
+            <form id="v1" onsubmit="return false;">
+                Value 1: <input type="number" id="userInput1"><br>
+                Value 2: <input type="number" id="userInput2"><br><br>
+                <input type ="button" onclick="printFactors(); isAmicable();" value="Submit">
+            </form>
+        </div>
+        <div class= "result">
+            <p id ="resuls"></p>
+        </div>
+        
+        <div class="factors">
+            <p id = "facs"></p>
+        </div>
+
+        <script>
+
+        function isAFactor(num) {
+            var factors = [];
+            for (let i = 1; i < num; i++){
+                if (num % i == 0){
+                    factors.push(i);
+                }
+            }
+            return factors;
+        }
+
+        function printFactors(){
+            var factors1 = [];
+            var factors2 = [];
+            var val1 = document.getElementById("userInput1").value;
+            var val2 = document.getElementById("userInput2").value;
+            factors1 = isAFactor(val1);
+            factors2 = isAFactor(val2);
+            document.getElementById("facs").innerHTML =
+              "Value One Factors: " + factors1.toString() + "<br>" +
+              "Value Two Factors: " + factors2.toString();
+        }
+
+        function getSum(num){
+            let fact_array = [];
+            let sum = 0;
+            fact_array = isAFactor(num);
+            for (let i = 0; i < fact_array.length; i++){
+                sum = sum + fact_array[i];
+            }
+            return sum;
+        }
+
+        function isAmicable(){
+            let val1 = document.getElementById("userInput1").value;
+            var val2 = document.getElementById("userInput2").value;
+            if ((getSum(val1) == val2) && (getSum(val2) == val1)){
+                document.getElementById("resuls").innerHTML = 
+                "The numbers: " + val1 + " and " + val2 + " are amicable.";
+            } else {
+                document.getElementById("resuls").innerHTML = 
+                "The numbers: " + val1 + " and " + val2 + " are not amicable.";
+            }
+        }
+
+        </script>
+    </body>
+</html>
